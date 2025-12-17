@@ -1,5 +1,6 @@
 using dayPlanner.Components;
 using dayPlanner.Data;
+using dayPlanner.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,9 @@ builder.Services.AddRazorComponents()
 // Add Entity Framework Core with SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register services
+builder.Services.AddScoped<IDayPlanService, DayPlanService>();
 
 var app = builder.Build();
 
