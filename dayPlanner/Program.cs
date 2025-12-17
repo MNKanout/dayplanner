@@ -34,4 +34,16 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
+// Ensure database is migrated and seeded
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    
+    // Apply any pending migrations
+    await context.Database.MigrateAsync();
+    
+    // Seed database with demo data
+    await DataSeeder.SeedAsync(context);
+}
+
 app.Run();
