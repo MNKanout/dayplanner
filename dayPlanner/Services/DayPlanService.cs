@@ -58,8 +58,7 @@ public class DayPlanService : IDayPlanService
         var maxOrder = await _context.Activities
             .Where(a => a.DayPlanId == dayPlanId)
             .Select(a => (int?)a.Order)
-            .DefaultIfEmpty(0)
-            .MaxAsync();
+            .MaxAsync() ?? 0;
         
         activity.Order = maxOrder + 1;
 

@@ -1,0 +1,42 @@
+@page "/today"
+@using dayPlanner.Data.Entities
+
+<PageTitle>Today's Plan</PageTitle>
+
+<div class="today-page">
+    <h1>Today's Schedule</h1>
+    
+    @if (plan == null)
+    {
+        <div class="no-plan-message" role="alert">
+            <p>No plan found for today.</p>
+            <p>Ask a teacher or parent to create a plan for you.</p>
+        </div>
+    }
+    else if (!plan.Activities.Any())
+    {
+        <div class="no-activities-message" role="alert">
+            <p>No activities scheduled for today.</p>
+        </div>
+    }
+    else
+    {
+        <div class="activities-list" role="list" aria-label="Today's activities">
+            @foreach (var activity in plan.Activities)
+            {
+                var isCompleted = activity.CompletedAt.HasValue;
+                var isCurrent = currentActivity != null && currentActivity.Id == activity.Id;
+                
+                <div role="listitem">
+                    <ActivityCard 
+                        Activity="activity"
+                        IsCurrent="isCurrent"
+                        IsCompleted="isCompleted"
+                        ShowActions="true"
+                        OnMarkAsDone="HandleMarkAsDone" />
+                </div>
+            }
+        </div>
+    }
+</div>
+
