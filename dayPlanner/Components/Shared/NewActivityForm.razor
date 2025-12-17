@@ -1,0 +1,172 @@
+@using dayPlanner.Data.Entities
+@using dayPlanner.Services
+@using Microsoft.AspNetCore.Components
+
+<div class="activity-form">
+    <h4>New Activity</h4>
+    <EditForm Model="@newActivity" OnValidSubmit="HandleSave">
+        <DataAnnotationsValidator />
+        
+        <div class="mb-3">
+            <label class="form-label">Title *</label>
+            <InputText @bind-Value="newActivity.Title" class="form-control" />
+            <ValidationMessage For="@(() => newActivity.Title)" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <InputText @bind-Value="newActivity.Location" class="form-control" />
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Start Time</label>
+                <input type="time" 
+                       class="form-control" 
+                       value="@GetTimeString(startTime)"
+                       @onchange="@((ChangeEventArgs e) => startTime = ParseTime(e.Value?.ToString()))" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">End Time</label>
+                <input type="time" 
+                       class="form-control" 
+                       value="@GetTimeString(endTime)"
+                       @onchange="@((ChangeEventArgs e) => endTime = ParseTime(e.Value?.ToString()))" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Icon</label>
+            <div class="icon-selector">
+                @foreach (var iconKey in DayPlanConstants.IconKeys)
+                {
+                    <button type="button"
+                            class="icon-button @(newActivity.IconKey == iconKey ? "selected" : "")"
+                            @onclick="() => newActivity.IconKey = iconKey">
+                        @GetIconEmoji(iconKey)
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Color</label>
+            <div class="color-selector">
+                @foreach (var colorKey in DayPlanConstants.ColorKeys)
+                {
+                    <button type="button"
+                            class="color-button @(newActivity.ColorKey == colorKey ? "selected" : "")"
+                            style="background-color: @GetColorValue(colorKey)"
+                            @onclick="() => newActivity.ColorKey = colorKey">
+                        @if (newActivity.ColorKey == colorKey)
+                        {
+                            <span>✓</span>
+                        }
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Activity</button>
+            <button type="button" class="btn btn-secondary" @onclick="HandleCancel">Cancel</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public EventCallback<Activity> OnSave { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+
+    private Activity newActivity = new Activity
+    {
+        Title = string.Empty,
+        IconKey = "home",
+        ColorKey = "blue"
+    };
+
+    private TimeOnly? startTime
+    {
+        get => newActivity.StartTime;
+        set => newActivity.StartTime = value;
+    }
+
+    private TimeOnly? endTime
+    {
+        get => newActivity.EndTime;
+        set => newActivity.EndTime = value;
+    }
+
+    private async Task HandleSave()
+    {
+        await OnSave.InvokeAsync(newActivity);
+        // Reset form
+        newActivity = new Activity
+        {
+            Title = string.Empty,
+            IconKey = "home",
+            ColorKey = "blue"
+        };
+        startTime = null;
+        endTime = null;
+    }
+
+    private async Task HandleCancel()
+    {
+        await OnCancel.InvokeAsync();
+        // Reset form
+        newActivity = new Activity
+        {
+            Title = string.Empty,
+            IconKey = "home",
+            ColorKey = "blue"
+        };
+        startTime = null;
+        endTime = null;
+    }
+
+    private string GetIconEmoji(string iconKey)
+    {
+        return iconKey switch
+        {
+            "home" => "🏠",
+            "school" => "🏫",
+            "meal" => "🍽️",
+            "break" => "☕",
+            "play" => "🎮",
+            "sleep" => "😴",
+            _ => "📋"
+        };
+    }
+
+    private string GetColorValue(string colorKey)
+    {
+        return colorKey switch
+        {
+            "blue" => "#3b82f6",
+            "green" => "#10b981",
+            "yellow" => "#f59e0b",
+            "orange" => "#f97316",
+            "red" => "#ef4444",
+            "purple" => "#a855f7",
+            _ => "#6b7280"
+        };
+    }
+
+    private string GetTimeString(TimeOnly? time)
+    {
+        return time?.ToString("HH:mm") ?? string.Empty;
+    }
+
+    private TimeOnly? ParseTime(string? timeString)
+    {
+        if (string.IsNullOrEmpty(timeString))
+            return null;
+        
+        if (TimeOnly.TryParse(timeString, out var time))
+            return time;
+        
+        return null;
+    }
+}
+

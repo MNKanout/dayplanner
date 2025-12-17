@@ -1,0 +1,97 @@
+@page "/edit-plan"
+@using dayPlanner.Data.Entities
+
+<PageTitle>Edit Day Plan</PageTitle>
+
+<div class="edit-plan-page">
+    <h1>Edit Day Plan</h1>
+    
+    <div class="date-selector mb-4">
+        <label for="date-picker" class="form-label">Select Date:</label>
+        <input type="date" 
+               id="date-picker" 
+               class="form-control" 
+               @bind="selectedDate" 
+               @bind:format="yyyy-MM-dd"
+               @bind:after="LoadPlanForDate" />
+    </div>
+
+    @if (plan == null)
+    {
+        <div class="no-plan-message">
+            <p>No plan found for this date.</p>
+            <button class="btn btn-primary" @onclick="CreateNewPlan">Create New Plan</button>
+        </div>
+    }
+    else
+    {
+        <div class="plan-header mb-4">
+            <label for="plan-title" class="form-label">Plan Title (optional):</label>
+            <input type="text" 
+                   id="plan-title" 
+                   class="form-control" 
+                   @bind="plan.Title" 
+                   @bind:event="oninput"
+                   @onblur="SavePlanTitle"
+                   placeholder="e.g., School Day, Weekend" />
+        </div>
+
+        <div class="activities-section">
+            <h2>Activities</h2>
+            
+            @if (!plan.Activities.Any())
+            {
+                <p class="text-muted">No activities yet. Add one below.</p>
+            }
+            else
+            {
+                <div class="activities-list">
+                    @{
+                        var orderedActivities = plan.Activities.OrderBy(a => a.Order).ToList();
+                    }
+                    @for (int i = 0; i < orderedActivities.Count; i++)
+                    {
+                        var activity = orderedActivities[i];
+                        var isFirst = i == 0;
+                        var isLast = i == orderedActivities.Count - 1;
+                        
+                        <div class="activity-item" key="@activity.Id">
+                            @if (editingActivityId == activity.Id)
+                            {
+                                <EditActivityForm 
+                                    Activity="activity"
+                                    OnSave="HandleSaveActivity"
+                                    OnCancel="HandleCancelEdit" />
+                            }
+                            else
+                            {
+                                <ActivityItemDisplay 
+                                    Activity="activity"
+                                    IsFirst="isFirst"
+                                    IsLast="isLast"
+                                    OnEdit="HandleEditActivity"
+                                    OnDelete="HandleDeleteActivity"
+                                    OnMoveUp="HandleMoveUp"
+                                    OnMoveDown="HandleMoveDown" />
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (isAddingNew)
+            {
+                <NewActivityForm 
+                    OnSave="HandleAddActivity"
+                    OnCancel="HandleCancelAdd" />
+            }
+            else
+            {
+                <button class="btn btn-success mt-3" @onclick="StartAddingNew">
+                    + Add New Activity
+                </button>
+            }
+        </div>
+    }
+</div>
+

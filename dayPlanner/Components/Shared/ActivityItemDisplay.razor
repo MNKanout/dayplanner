@@ -1,0 +1,38 @@
+@using dayPlanner.Data.Entities
+
+<div class="activity-item-display">
+    <div class="activity-preview">
+        <div class="activity-color-indicator" style="background-color: @GetColorValue()"></div>
+        <div class="activity-info">
+            <strong>@Activity.Title</strong>
+            @if (!string.IsNullOrEmpty(Activity.Location))
+            {
+                <span class="text-muted"> - @Activity.Location</span>
+            }
+            @if (Activity.StartTime.HasValue || Activity.EndTime.HasValue)
+            {
+                <span class="text-muted"> (@GetTimeRange())</span>
+            }
+        </div>
+        <div class="activity-icon-preview">@GetIconEmoji()</div>
+    </div>
+    <div class="activity-actions">
+        <button class="btn btn-sm btn-outline-primary" @onclick="() => OnEdit.InvokeAsync(Activity.Id)">
+            Edit
+        </button>
+        <button class="btn btn-sm btn-outline-danger" @onclick="() => OnDelete.InvokeAsync(Activity.Id)">
+            Delete
+        </button>
+        <button class="btn btn-sm btn-outline-secondary" 
+                @onclick="() => OnMoveUp.InvokeAsync(Activity.Id)"
+                disabled="@IsFirst">
+            ↑
+        </button>
+        <button class="btn btn-sm btn-outline-secondary" 
+                @onclick="() => OnMoveDown.InvokeAsync(Activity.Id)"
+                disabled="@IsLast">
+            ↓
+        </button>
+    </div>
+</div>
+

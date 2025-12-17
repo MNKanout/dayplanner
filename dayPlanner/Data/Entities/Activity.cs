@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace dayPlanner.Data.Entities;
 
 public class Activity
@@ -5,6 +7,8 @@ public class Activity
     public int Id { get; set; }
     public int DayPlanId { get; set; }
     public int Order { get; set; }
+    
+    [Required(ErrorMessage = "Title is required")]
     public string Title { get; set; } = string.Empty;
     public string? Location { get; set; }
     public TimeOnly? StartTime { get; set; }

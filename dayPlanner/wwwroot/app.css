@@ -255,6 +255,155 @@ h1:focus {
     margin: 0.5rem 0;
 }
 
+/* Edit Plan Page Styles */
+.edit-plan-page {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.edit-plan-page h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+}
+
+.date-selector,
+.plan-header {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.activities-section {
+    margin-top: 2rem;
+}
+
+.activities-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.activities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.activity-item {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Activity Item Display */
+.activity-item-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.activity-preview {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.activity-color-indicator {
+    width: 4px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+.activity-info {
+    flex: 1;
+}
+
+.activity-icon-preview {
+    font-size: 1.5rem;
+}
+
+.activity-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Activity Form Styles */
+.activity-form {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #3b82f6;
+}
+
+.activity-form h4 {
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+}
+
+.icon-selector,
+.color-selector {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.icon-button {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.icon-button:hover {
+    border-color: #3b82f6;
+    transform: scale(1.1);
+}
+
+.icon-button.selected {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.color-button {
+    width: 48px;
+    height: 48px;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.color-button:hover {
+    transform: scale(1.1);
+    border-color: #1a1a1a;
+}
+
+.color-button.selected {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px currentColor;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
 /* High contrast and accessibility */
 @media (prefers-contrast: high) {
     .activity-card {
@@ -265,7 +414,13 @@ h1:focus {
         font-weight: 900;
     }
     
-    .today-page h1 {
+    .today-page h1,
+    .edit-plan-page h1 {
         font-weight: 900;
+    }
+    
+    .icon-button,
+    .color-button {
+        border-width: 3px;
     }
 }
