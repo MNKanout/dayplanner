@@ -1,0 +1,125 @@
+@using dayPlanner.Data.Entities
+
+<div class="activity-card @GetCardClasses()" role="article" aria-label="@GetAriaLabel()">
+    <div class="activity-color-strip" style="background-color: @GetColorValue()"></div>
+    
+    <div class="activity-content">
+        <div class="activity-header">
+            <span class="activity-icon" aria-hidden="true">@GetIconEmoji()</span>
+            <h3 class="activity-title">@Activity.Title</h3>
+            @if (IsCurrent)
+            {
+                <span class="activity-badge current" aria-label="Current activity">NOW</span>
+            }
+            else if (IsCompleted)
+            {
+                <span class="activity-badge completed" aria-label="Completed">✓</span>
+            }
+            else
+            {
+                <span class="activity-badge upcoming" aria-label="Upcoming">NEXT</span>
+            }
+        </div>
+        
+        @if (!string.IsNullOrEmpty(Activity.Location))
+        {
+            <p class="activity-location" aria-label="Location">📍 @Activity.Location</p>
+        }
+        
+        @if (Activity.StartTime.HasValue || Activity.EndTime.HasValue)
+        {
+            <p class="activity-time" aria-label="Time">
+                @GetTimeRange()
+            </p>
+        }
+    </div>
+    
+    @if (ShowActions && IsCurrent && !IsCompleted)
+    {
+        <div class="activity-actions">
+            <button class="btn btn-primary btn-mark-done" 
+                    @onclick="HandleMarkAsDone" 
+                    aria-label="Mark @Activity.Title as done">
+                Mark as Done
+            </button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public Activity Activity { get; set; } = null!;
+    [Parameter] public bool IsCurrent { get; set; }
+    [Parameter] public bool IsCompleted { get; set; }
+    [Parameter] public bool ShowActions { get; set; }
+    [Parameter] public EventCallback OnMarkAsDone { get; set; }
+
+    private string GetCardClasses()
+    {
+        var classes = "activity-card-base";
+        if (IsCompleted) classes += " completed";
+        if (IsCurrent) classes += " current";
+        return classes;
+    }
+
+    private string GetAriaLabel()
+    {
+        var label = $"Activity: {Activity.Title}";
+        if (IsCurrent) label += ", currently active";
+        if (IsCompleted) label += ", completed";
+        return label;
+    }
+
+    private string GetColorValue()
+    {
+        return Activity.ColorKey switch
+        {
+            "blue" => "#3b82f6",
+            "green" => "#10b981",
+            "yellow" => "#f59e0b",
+            "orange" => "#f97316",
+            "red" => "#ef4444",
+            "purple" => "#a855f7",
+            _ => "#6b7280"
+        };
+    }
+
+    private string GetIconEmoji()
+    {
+        return Activity.IconKey switch
+        {
+            "home" => "🏠",
+            "school" => "🏫",
+            "meal" => "🍽️",
+            "break" => "☕",
+            "play" => "🎮",
+            "sleep" => "😴",
+            _ => "📋"
+        };
+    }
+
+    private string GetTimeRange()
+    {
+        if (Activity.StartTime.HasValue && Activity.EndTime.HasValue)
+        {
+            return $"{Activity.StartTime.Value:HH:mm} - {Activity.EndTime.Value:HH:mm}";
+        }
+        else if (Activity.StartTime.HasValue)
+        {
+            return $"Starts at {Activity.StartTime.Value:HH:mm}";
+        }
+        else if (Activity.EndTime.HasValue)
+        {
+            return $"Ends at {Activity.EndTime.Value:HH:mm}";
+        }
+        return string.Empty;
+    }
+
+    private async Task HandleMarkAsDone()
+    {
+        if (OnMarkAsDone.HasDelegate)
+        {
+            await OnMarkAsDone.InvokeAsync();
+        }
+    }
+}
+
