@@ -1,24 +1,98 @@
-/* Bootstrap navbar customizations */
-.navbar {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* Bootstrap navbar customizations - Force complete transparency */
+.navbar,
+.navbar.navbar-light,
+.navbar.navbar-expand-lg,
+.navbar.navbar-light.navbar-expand-lg,
+nav.navbar,
+nav.navbar.navbar-light,
+nav.navbar.navbar-expand-lg {
+    background-color: transparent !important;
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    border-top: none !important;
+    padding: 1.5rem 0 !important;
+    margin: 0 !important;
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+}
+
+.navbar .container-fluid,
+.navbar .container-fluid.container-fluid,
+.navbar > .container-fluid {
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* Override any Bootstrap default navbar backgrounds */
+.navbar-collapse,
+.navbar-nav,
+.navbar-nav .nav-item {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .navbar .container-fluid {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    .navbar {
+        padding: 1rem 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .container-fluid {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    .navbar {
+        padding: 0.75rem 0 !important;
+    }
+    
+    .navbar-brand {
+        padding-left: 0 !important;
+        margin-right: 0.5rem !important;
+    }
+    
+    .navbar-toggler {
+        padding: 0.25rem 0.5rem !important;
+        margin-left: 0 !important;
+    }
 }
 
 .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: bold;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
+    color: var(--primary-color) !important;
 }
 
 .nav-link {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     padding: 0.5rem 1rem !important;
     border-radius: 6px;
-    transition: background-color 0.2s, transform 0.2s;
+    transition: color 0.2s, transform 0.2s;
     cursor: pointer;
+    color: black !important;
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: var(--primary-color) !important;
     transform: translateY(-2px);
 }
 
@@ -29,31 +103,41 @@
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .navbar-brand {
-        font-size: 1.25rem;
-        color: white !important;
+        font-size: 2.2rem;
+        color: var(--primary-color) !important;
     }
     
     .nav-link {
         padding: 0.75rem 1rem !important;
-        color: white !important;
+        font-size: 1.1rem;
+        color: black !important;
+    }
+    
+    .nav-link:hover {
+        color: var(--primary-color) !important;
     }
     
     .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
     
     .navbar-toggler {
-        border-color: rgba(255, 255, 255, 0.5) !important;
+        border-color: rgba(0, 0, 0, 0.5) !important;
     }
 }
 
 @media (max-width: 480px) {
     .navbar-brand {
-        font-size: 1.1rem;
-        color: white !important;
+        font-size: 2rem;
+        color: var(--primary-color) !important;
     }
     
     .nav-link {
-        color: white !important;
+        font-size: 1rem;
+        color: black !important;
+    }
+    
+    .nav-link:hover {
+        color: var(--primary-color) !important;
     }
 }
