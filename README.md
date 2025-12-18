@@ -104,12 +104,7 @@ git clone https://github.com/MNKanout/dayplanner.git
 cd dayplanner
 ```
 
-2. Navigate to the project directory:
-```bash
-cd dayPlanner
-```
-
-3. Restore dependencies:
+2. Restore dependencies:
 ```bash
 dotnet restore
 ```
