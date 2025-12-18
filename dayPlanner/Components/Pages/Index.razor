@@ -1,21 +1,131 @@
 @page "/"
+@inject IJSRuntime JSRuntime
+@using Microsoft.AspNetCore.Components.Web
 
-<PageTitle>Day Planner</PageTitle>
+<PageTitle>Day Planner - Your Daily Adventure Awaits!</PageTitle>
 
-<div class="landing-page">
-    <h1>Visual Schedule Day Planner</h1>
-    <p class="subtitle">Plan and view daily activities</p>
-    
-    <div class="navigation-buttons">
-        <a href="/today" class="btn btn-large btn-primary" role="button" aria-label="View today's plan">
-            <span class="btn-icon">📅</span>
-            <span class="btn-text">Today's Plan</span>
-        </a>
-        
-        <a href="/edit-plan" class="btn btn-large btn-secondary" role="button" aria-label="Edit day plan">
-            <span class="btn-icon">✏️</span>
-            <span class="btn-text">Edit Plan</span>
-        </a>
+<!-- Section 1: Hero/Introduction -->
+<section id="home" class="hero-section">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">🌟 Your Daily Adventure Awaits! 🌟</h1>
+            <p class="hero-subtitle">
+                Welcome to your very own Visual Schedule Day Planner! 
+                This special tool helps you see what's coming next in your day, 
+                so you can feel prepared and confident.
+            </p>
+            <p class="hero-description">
+                Every day is a new adventure, and we're here to help you navigate it with ease. 
+                You can see all your activities, check them off as you complete them, 
+                and celebrate your amazing accomplishments!
+            </p>
+            <div class="hero-actions">
+                <a href="#services" class="learn-more-btn" @onclick="ScrollToServices" @onclick:preventDefault="true">
+                    <span class="btn-text">Learn More</span>
+                    <span class="btn-icon">✨</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-illustration">
+            <div class="illustration-placeholder">
+                <span class="emoji-large">📅</span>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="scroll-indicator">
+        <span>↓</span>
+    </div>
+</section>
 
+<!-- Section 2: Services -->
+<section id="services" class="services-section">
+    <div class="services-container">
+        <h2 class="section-title">What We Offer</h2>
+        <p class="section-subtitle">Everything you need to have an amazing, organized day!</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📝</div>
+                <h3 class="service-title">Create Your Schedule</h3>
+                <p class="service-description">
+                    Build your daily plan with colorful activities. 
+                    Add times, locations, and fun icons to make it yours!
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">👀</div>
+                <h3 class="service-title">View Your Day</h3>
+                <p class="service-description">
+                    See all your activities in one place. 
+                    Know what's happening now and what's coming next!
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">✅</div>
+                <h3 class="service-title">Track Progress</h3>
+                <p class="service-description">
+                    Mark activities as complete and watch your day unfold. 
+                    Feel proud of everything you accomplish!
+                </p>
+            </div>
+        </div>
+        
+        <div class="get-started-container">
+            <a href="/today" class="get-started-btn">
+                <span class="btn-text">Get Started!</span>
+                <span class="btn-icon">🚀</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: About Statped -->
+<section id="statped" class="statped-section">
+    <div class="statped-container">
+        <h2 class="section-title">Made with Love for Statped</h2>
+        <div class="statped-content">
+            <div class="statped-text">
+                <p class="statped-intro">
+                    This Visual Schedule Day Planner was especially designed for <strong>Statped</strong>, 
+                    a Norwegian national service that supports children and pupils with special educational needs.
+                </p>
+                <p class="statped-mission">
+                    Statped's mission is to help children and young people with special needs lead independent lives 
+                    and actively participate in education, work, and society. They work with structure, routines, 
+                    and universal design of digital tools - just like this planner!
+                </p>
+                <p class="statped-support">
+                    We believe that every child deserves tools that help them succeed. 
+                    This planner is designed with you in mind, using clear visuals, simple navigation, 
+                    and encouraging messages to support your daily journey.
+                </p>
+                <div class="statped-values">
+                    <div class="value-item">🎯 Structure & Predictability</div>
+                    <div class="value-item">💙 Support & Understanding</div>
+                    <div class="value-item">🌟 Independence & Confidence</div>
+                </div>
+            </div>
+            <div class="statped-visual">
+                <div class="visual-placeholder">
+                    <span class="emoji-large">💙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private async Task ScrollToServices(MouseEventArgs e)
+    {
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("scrollToSection", "services");
+        }
+        catch
+        {
+            // Fallback if JS is not loaded
+        }
+    }
+}

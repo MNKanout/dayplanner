@@ -3,31 +3,32 @@
 @using Microsoft.AspNetCore.Components
 
 <div class="activity-form">
-    <h4>Edit Activity</h4>
+    <h4>✏️ Edit Your Activity ✏️</h4>
+    <p class="form-intro">Want to change something? No problem! Update the details below.</p>
     <EditForm Model="@Activity" OnValidSubmit="HandleSave">
         <DataAnnotationsValidator />
         
         <div class="mb-3">
-            <label class="form-label">Title *</label>
-            <InputText @bind-Value="Activity.Title" class="form-control" />
+            <label class="form-label">📝 What's the Activity? *</label>
+            <InputText @bind-Value="Activity.Title" class="form-control" placeholder="e.g., Math Class, Lunch Time, Play Outside" />
             <ValidationMessage For="@(() => Activity.Title)" />
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Location</label>
-            <InputText @bind-Value="Activity.Location" class="form-control" />
+            <label class="form-label">📍 Where Will This Happen?</label>
+            <InputText @bind-Value="Activity.Location" class="form-control" placeholder="e.g., Classroom 3, Cafeteria, Playground" />
         </div>
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <label class="form-label">Start Time</label>
+                <label class="form-label">🕐 Start Time</label>
                 <input type="time" 
                        class="form-control" 
                        value="@GetTimeString(startTime)"
                        @onchange="@((ChangeEventArgs e) => startTime = ParseTime(e.Value?.ToString()))" />
             </div>
             <div class="col-md-6">
-                <label class="form-label">End Time</label>
+                <label class="form-label">🕑 End Time</label>
                 <input type="time" 
                        class="form-control" 
                        value="@GetTimeString(endTime)"
@@ -36,13 +37,14 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Icon</label>
+            <label class="form-label">🎨 Pick a Fun Icon!</label>
             <div class="icon-selector">
                 @foreach (var iconKey in DayPlanConstants.IconKeys)
                 {
                     <button type="button"
                             class="icon-button @(Activity.IconKey == iconKey ? "selected" : "")"
-                            @onclick="() => Activity.IconKey = iconKey">
+                            @onclick="() => Activity.IconKey = iconKey"
+                            aria-label="Select @iconKey icon">
                         @GetIconEmoji(iconKey)
                     </button>
                 }
@@ -50,14 +52,15 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Color</label>
+            <label class="form-label">🌈 Choose Your Favorite Color!</label>
             <div class="color-selector">
                 @foreach (var colorKey in DayPlanConstants.ColorKeys)
                 {
                     <button type="button"
                             class="color-button @(Activity.ColorKey == colorKey ? "selected" : "")"
                             style="background-color: @GetColorValue(colorKey)"
-                            @onclick="() => Activity.ColorKey = colorKey">
+                            @onclick="() => Activity.ColorKey = colorKey"
+                            aria-label="Select @colorKey color">
                         @if (Activity.ColorKey == colorKey)
                         {
                             <span>✓</span>
@@ -68,7 +71,10 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">
+                <span>💾</span>
+                <span>Save Changes</span>
+            </button>
             <button type="button" class="btn btn-secondary" @onclick="HandleCancel">Cancel</button>
         </div>
     </EditForm>

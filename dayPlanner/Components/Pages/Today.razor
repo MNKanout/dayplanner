@@ -2,22 +2,26 @@
 @using dayPlanner.Data.Entities
 @rendermode InteractiveServer
 
-<PageTitle>Today's Plan</PageTitle>
+<PageTitle>Today's Plan - You've Got This! 🌟</PageTitle>
 
 <div class="today-page">
-    <h1>Today's Schedule</h1>
+    <h1>🌟 Today's Amazing Schedule 🌟</h1>
+    <p class="today-subtitle">You're doing great! Let's see what adventures await you today.</p>
     
     @if (plan == null)
     {
         <div class="no-plan-message" role="alert">
-            <p>No plan found for today.</p>
-            <p>Ask a teacher or parent to create a plan for you.</p>
+            <div class="message-icon">📋</div>
+            <p class="message-title">No plan found for today.</p>
+            <p class="message-text">Don't worry! Ask a teacher or parent to create a plan for you, and you'll be all set!</p>
         </div>
     }
     else if (!plan.Activities.Any())
     {
         <div class="no-activities-message" role="alert">
-            <p>No activities scheduled for today.</p>
+            <div class="message-icon">✨</div>
+            <p class="message-title">No activities scheduled for today.</p>
+            <p class="message-text">Looks like you have a free day! Enjoy your time!</p>
         </div>
     }
     else
@@ -37,6 +41,38 @@
                         OnMarkAsDone="HandleMarkAsDone" />
                 </div>
             }
+        </div>
+
+        @if (AllActivitiesCompleted)
+        {
+            <div class="completion-celebration">
+                <div class="celebration-content">
+                    <div class="trophy-icon">🏆</div>
+                    <h2 class="celebration-title">🎉 Amazing! You Did It! 🎉</h2>
+                    <p class="celebration-message">
+                        You completed all your tasks today! You're a superstar! 
+                        Look at everything you accomplished - you should be so proud of yourself!
+                    </p>
+                    <p class="celebration-encouragement">
+                        Ready to take on tomorrow? You've got this! 💪
+                    </p>
+                    <div class="celebration-confetti">
+                        <span>✨</span>
+                        <span>🌟</span>
+                        <span>🎊</span>
+                        <span>🎉</span>
+                        <span>⭐</span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="plan-next-day-container">
+            <a href="/edit-plan" class="plan-next-day-btn">
+                <span class="btn-icon">📅</span>
+                <span class="btn-text">Plan Your Next Day!</span>
+                <span class="btn-icon">✨</span>
+            </a>
         </div>
     }
 </div>

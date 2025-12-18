@@ -2,13 +2,14 @@
 @using dayPlanner.Data.Entities
 @rendermode InteractiveServer
 
-<PageTitle>Edit Day Plan</PageTitle>
+<PageTitle>Create Your Amazing Day Plan! ✨</PageTitle>
 
 <div class="edit-plan-page">
-    <h1>Edit Day Plan</h1>
+    <h1>✨ Create Your Amazing Day Plan! ✨</h1>
+    <p class="page-subtitle">Let's plan your day together! You can add all the fun activities you'll do.</p>
     
     <div class="date-selector mb-4">
-        <label for="date-picker" class="form-label">Select Date:</label>
+        <label for="date-picker" class="form-label">📅 Pick a Date:</label>
         <input type="date" 
                id="date-picker" 
                class="form-control" 
@@ -20,32 +21,38 @@
     @if (plan == null)
     {
         <div class="no-plan-message">
-            <p>No plan found for this date.</p>
-            <button class="btn btn-primary" @onclick="CreateNewPlan">Create New Plan</button>
+            <div class="message-icon">📋</div>
+            <p class="message-title">No plan found for this date.</p>
+            <p class="message-text">That's okay! Let's create a brand new plan together!</p>
+            <button class="btn btn-primary btn-large" @onclick="CreateNewPlan">
+                <span class="btn-icon">✨</span>
+                <span class="btn-text">Create New Plan</span>
+            </button>
         </div>
     }
     else
     {
         <div class="plan-header mb-4">
-            <label for="plan-title" class="form-label">Plan Title (optional):</label>
+            <label for="plan-title" class="form-label">📝 Give Your Plan a Name (optional):</label>
             <input type="text" 
                    id="plan-title" 
                    class="form-control" 
                    @bind="plan.Title" 
                    @bind:event="oninput"
                    @onblur="SavePlanTitle"
-                   placeholder="e.g., School Day, Weekend" />
+                   placeholder="e.g., School Day, Weekend Adventure, Fun Friday" />
         </div>
 
         <div class="activities-section">
-            <h2>Activities</h2>
+            <h2>🎯 Your Activities</h2>
             
             @if (!plan.Activities.Any())
             {
-                <p class="text-muted">No activities yet. Add one below.</p>
+                <p class="text-muted friendly-text">No activities yet. Ready to add your first one? Let's do it! 🚀</p>
             }
             else
             {
+                <p class="friendly-text">Look at all your activities! You're doing great! 🌟</p>
                 <div class="activities-list">
                     @{
                         var orderedActivities = plan.Activities.OrderBy(a => a.Order).ToList();
@@ -88,8 +95,9 @@
             }
             else
             {
-                <button class="btn btn-success mt-3" @onclick="StartAddingNew">
-                    + Add New Activity
+                <button class="btn btn-success mt-3 btn-add-activity" @onclick="StartAddingNew">
+                    <span class="btn-icon">➕</span>
+                    <span class="btn-text">Add New Activity</span>
                 </button>
             }
         </div>

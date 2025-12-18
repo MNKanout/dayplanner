@@ -36,6 +36,17 @@ namespace dayPlanner.Components.Pages
                 await LoadTodayPlan(); // Reload to update UI
             }
         }
+
+        private bool AllActivitiesCompleted
+        {
+            get
+            {
+                if (plan == null || !plan.Activities.Any())
+                    return false;
+
+                return plan.Activities.All(a => a.CompletedAt.HasValue);
+            }
+        }
     }
 }
 
