@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #0EA5E9;
-    --primary-hover: #0284C7;
+    --primary-color: #7c8cfd;
+    --primary-hover: #5d6efc;
     --secondary-color: #FF8C42;
     --success-color: #52C41A;
     --text-primary: #1A1A1A;
@@ -15,9 +15,10 @@ html {
 }
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: white;
 }
 
 a, .btn-link {
@@ -35,7 +36,7 @@ a, .btn-link {
     background-color: var(--primary-hover);
     border-color: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 4px 8px rgba(124, 140, 253, 0.3);
 }
 
 .btn-secondary {
@@ -106,7 +107,7 @@ h1:focus {
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background: linear-gradient(135deg, #E8F4FD 0%, #FFFFFF 100%);
+    background: white;
     scroll-margin-top: 70px;
     position: relative;
 }
@@ -128,9 +129,11 @@ h1:focus {
 .hero-title {
     font-size: 3.5rem;
     font-weight: bold;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
+    color: var(--primary-color);
     line-height: 1.2;
+    letter-spacing: 0.02em;
 }
 
 .hero-subtitle {
@@ -158,35 +161,39 @@ h1:focus {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--primary-color);
-    background-color: white;
-    border: 2px solid var(--primary-color);
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
     border-radius: 25px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
+    box-shadow: 0 2px 8px rgba(124, 140, 253, 0.15);
 }
 
 .learn-more-btn:hover {
-    background-color: var(--primary-color);
+    background-color: var(--primary-hover);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-}
-
-.learn-more-btn .btn-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.learn-more-btn:hover .btn-icon {
-    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(124, 140, 253, 0.3);
 }
 
 .hero-illustration {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: white;
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 700px;
+    width: auto;
+    object-fit: contain;
+    background: white;
+    mix-blend-mode: normal;
 }
 
 .illustration-placeholder {
@@ -197,12 +204,9 @@ h1:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 10px 30px rgba(124, 140, 253, 0.3);
 }
 
-.emoji-large {
-    font-size: 8rem;
-}
 
 .scroll-indicator {
     position: absolute;
@@ -233,7 +237,7 @@ h1:focus {
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    background-color: var(--bg-white);
+    background-color: white;
     scroll-margin-top: 70px;
 }
 
@@ -246,8 +250,10 @@ h1:focus {
 .section-title {
     font-size: 3rem;
     font-weight: bold;
-    color: var(--text-primary);
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
+    color: var(--primary-color);
     margin-bottom: 1rem;
+    letter-spacing: 0.02em;
 }
 
 .section-subtitle {
@@ -270,24 +276,39 @@ h1:focus {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s, box-shadow 0.3s;
     border: 2px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.2);
+    box-shadow: 0 8px 30px rgba(124, 140, 253, 0.2);
     border-color: var(--primary-color);
 }
 
 .service-icon {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.service-icon svg {
+    width: 100%;
+    height: 100%;
 }
 
 .service-title {
     font-size: 1.75rem;
     font-weight: bold;
-    color: var(--text-primary);
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
+    color: var(--primary-color);
     margin-bottom: 1rem;
+    letter-spacing: 0.02em;
 }
 
 .service-description {
@@ -307,29 +328,20 @@ h1:focus {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--primary-color);
-    background-color: white;
-    border: 2px solid var(--primary-color);
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
     border-radius: 25px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
+    box-shadow: 0 2px 8px rgba(124, 140, 253, 0.15);
 }
 
 .get-started-btn:hover {
-    background-color: var(--primary-color);
+    background-color: var(--primary-hover);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-}
-
-.get-started-btn .btn-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.get-started-btn:hover .btn-icon {
-    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(124, 140, 253, 0.3);
 }
 
 /* Plan Next Day Button */
@@ -401,7 +413,7 @@ h1:focus {
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    background: linear-gradient(135deg, #FFFFFF 0%, #F0F7FF 100%);
+    background: white;
     scroll-margin-top: 70px;
 }
 
@@ -435,21 +447,6 @@ h1:focus {
     font-weight: 700;
 }
 
-.statped-values {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.value-item {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
 
 .statped-visual {
     display: flex;
@@ -460,12 +457,16 @@ h1:focus {
 .visual-placeholder {
     width: 250px;
     height: 250px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+}
+
+.visual-placeholder svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 /* Mobile Responsive Styles */
@@ -503,6 +504,15 @@ h1:focus {
     .hero-content {
         gap: 2rem;
     }
+    
+    .hero-illustration {
+        order: 1;
+    }
+    
+    .hero-text {
+        order: 2;
+        text-align: center;
+    }
 
     .hero-title {
         font-size: 2rem;
@@ -519,8 +529,16 @@ h1:focus {
         text-align: center;
     }
 
-    .hero-text {
-        text-align: center;
+    .hero-image {
+        max-height: 400px;
+        max-width: 90%;
+        background: white;
+    }
+    
+    .hero-illustration {
+        background: white;
+        padding: 0.5rem;
+        border-radius: 15px;
     }
 
     .illustration-placeholder {
@@ -528,9 +546,6 @@ h1:focus {
         height: 200px;
     }
 
-    .emoji-large {
-        font-size: 5rem;
-    }
 
     .services-section {
         padding: 3rem 1rem;
@@ -551,7 +566,8 @@ h1:focus {
     }
 
     .service-icon {
-        font-size: 3rem;
+        width: 56px;
+        height: 56px;
     }
 
     .service-title {
@@ -697,7 +713,8 @@ h1:focus {
     }
 
     .service-icon {
-        font-size: 2.5rem;
+        width: 48px;
+        height: 48px;
     }
 
     .service-title {
@@ -716,9 +733,6 @@ h1:focus {
         height: 150px;
     }
 
-    .emoji-large {
-        font-size: 4rem;
-    }
 
     .today-page h1 {
         font-size: 1.5rem;
@@ -906,9 +920,11 @@ h1:focus {
 .today-page h1 {
     font-size: 2.5rem;
     font-weight: bold;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: var(--primary-color);
     text-align: center;
+    letter-spacing: 0.02em;
 }
 
 .today-subtitle {
@@ -997,8 +1013,10 @@ h1:focus {
 .celebration-title {
     font-size: 2.5rem;
     font-weight: bold;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
     margin-bottom: 1rem;
     color: white;
+    letter-spacing: 0.02em;
 }
 
 .celebration-message {
@@ -1054,9 +1072,11 @@ h1:focus {
 .edit-plan-page h1 {
     font-size: 2.5rem;
     font-weight: bold;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: var(--primary-color);
     text-align: center;
+    letter-spacing: 0.02em;
 }
 
 .page-subtitle {
@@ -1105,7 +1125,11 @@ h1:focus {
 
 .activities-section h2 {
     font-size: 1.75rem;
+    font-weight: bold;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive;
+    color: var(--primary-color);
     margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
 }
 
 .activities-list {
@@ -1161,7 +1185,7 @@ h1:focus {
     padding: 2rem;
     border-radius: 12px;
     border: 3px solid var(--primary-color);
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+    box-shadow: 0 4px 12px rgba(124, 140, 253, 0.15);
 }
 
 .activity-form h4 {
