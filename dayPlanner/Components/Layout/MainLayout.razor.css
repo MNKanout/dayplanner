@@ -10,6 +10,12 @@ main {
     padding-top: 70px; /* Account for fixed navbar */
 }
 
+@media (max-width: 768px) {
+    main {
+        padding-top: 60px; /* Smaller navbar on mobile */
+    }
+}
+
 .content {
     width: 100%;
 }
